@@ -17,6 +17,18 @@
   
   <servlet-mapping>
   	<servlet-name>departmentController</servlet-name>
-  	<url-pattern>/departments/list.do</url-pattern>
+  	<url-pattern>/departments/*</url-pattern>
+  </servlet-mapping>
+  
+
+  
+    <servlet>
+  	<servlet-name>locationController</servlet-name>
+  	<servlet-class>com.winter.app.locations.LocationController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>locationController</servlet-name>
+  	<url-pattern>/locations/*</url-pattern>
   </servlet-mapping>
 </web-app>
