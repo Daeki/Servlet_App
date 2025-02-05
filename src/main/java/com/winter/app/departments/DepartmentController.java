@@ -46,11 +46,17 @@ public class DepartmentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		
+		
+		
 		try {
 			// TODO Auto-generated method stub
 			String method = request.getMethod();
 			StringBuffer sb  = request.getRequestURL();
 			String uri = request.getRequestURI();
+			
+			//parameter
+			String department_id = request.getParameter("department_id");
 			
 	//		System.out.println(method);
 	//		System.out.println(sb.toString());
