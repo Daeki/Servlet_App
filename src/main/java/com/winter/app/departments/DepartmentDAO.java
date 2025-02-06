@@ -9,6 +9,45 @@ import java.util.List;
 import com.winter.app.utils.DBConnection;
 
 public class DepartmentDAO {
+	//부서 수정
+	public int update(DepartmentDTO departmentDTO)throws Exception{
+		int result=0;
+		Connection con = DBConnection.getConnection();
+		
+		String sql="UPDATE DEPARTMENTS SET DEPARTMENT_NAME=?, MANAGER_ID=?, LOCATION_ID=?"
+				+ " WHERE DEPARTMENT_ID=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, departmentDTO.getDepartment_name());
+		st.setLong(2, departmentDTO.getManager_id());
+		st.setLong(3, departmentDTO.getLocation_id());
+		st.setLong(4, departmentDTO.getDepartment_id());
+		
+		result = st.executeUpdate();
+		
+		DBConnection.disConnction(st, con);
+		
+		return result;
+	}
+	
+	//부서 삭제
+	public int delete(DepartmentDTO departmentDTO)throws Exception{
+		int result=0;
+		Connection con = DBConnection.getConnection();
+		
+		String sql="DELETE DEPARTMENTS WHERE DEPARTMENT_ID=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setLong(1, departmentDTO.getDepartment_id());
+		
+		result = st.executeUpdate();
+		
+		DBConnection.disConnction(st, con);
+		
+		return result;
+	}
 	
 	//부서 추가
 	public int add(DepartmentDTO departmentDTO)throws Exception{
