@@ -5,18 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/reset.css">
 </head>
 <body>
-	
-	<h1>Welcome Home Page</h1>
-	<h3>.....</h3>
-	<h3>VS CODE</h3>
-	<h3>VSCODE2</h3>
-	<h3>VSCODE3</h3>
-	
-	<a href="/departments/list.jsp">Department List</a>
-	<a href="./locations/list.jsp">Location List</a>
-	
+	<h1 style="color: red;"></h1>
+
 
 </body>
 </html>
