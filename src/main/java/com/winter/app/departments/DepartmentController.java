@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.winter.app.ActionForward;
+
 /**
  * Servlet implementation class DepartmentController
  */
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DepartmentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private DepartmentDAO departmentDAO;
+	private DepartmentService departmentService;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +29,7 @@ public class DepartmentController extends HttpServlet {
     public DepartmentController() {
         super();
         // TODO Auto-generated constructor stub
-        departmentDAO = new DepartmentDAO();
+        departmentService = new DepartmentService();
     }
 
 	/**
@@ -54,31 +56,38 @@ public class DepartmentController extends HttpServlet {
 		uri = uri.substring(uri.lastIndexOf("/")+1);
 		
 		String path="";
-		
+		ActionForward actionForward = new ActionForward();
 		try {
 			switch(uri) {
 			case "list.do":
-				path="/WEB-INF/views/departments/list.jsp";
-				
-				List<DepartmentDTO> ar = departmentDAO.getList();		
+							
+				departmentService.getList(request, actionForward);		
 				//attribute : 속성 (키:String , 값:Object)
 				//          
-				request.setAttribute("list", ar);				
+								
 				break;
 			case "detail.do":
-				path="/WEB-INF/views/departments/detail.jsp";
-				String id=request.getParameter("department_id");
-				DepartmentDTO departmentDTO = new DepartmentDTO();
-				departmentDTO.setDepartment_id(Long.parseLong(id));
-				departmentDTO = departmentDAO.getDetail(departmentDTO);
-				request.setAttribute("dto", departmentDTO);
+								
+				departmentService.getDetail(request, actionForward);
+				
+				break;
+			case "add.do":
+				String method = request.getMethod();
+				if(method.toUpperCase().equals("POST")) {
+					departmentService.add(request, actionForward);
+					
+				} else {
+					actionForward.setFlag(true);
+					actionForward.setPath("/WEB-INF/views/departments/add.jsp");
+				}
+				
 				break;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher view = request.getRequestDispatcher(path);
+		RequestDispatcher view = request.getRequestDispatcher(actionForward.getPath());
 		view.forward(request, response);		
 		
 		

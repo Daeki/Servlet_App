@@ -9,7 +9,7 @@
 <body>
 	<h1>부서 추가 페이지</h1>
 	
-	<form action="./addProcess.jsp" method="post">
+	<form action="./add.do" method="post">
 		<input type="text" name="department_name" value="test" >
 		<input type="text" name="manager_id">
 		<input type="text" name="location_id">
