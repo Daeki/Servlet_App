@@ -57,6 +57,8 @@ public class DepartmentController extends HttpServlet {
 		
 		String path="";
 		ActionForward actionForward = new ActionForward();
+		actionForward.setFlag(true);
+		actionForward.setPath("/WEB-INF/views/errors/notfound.jsp");
 		try {
 			switch(uri) {
 			case "list.do":
@@ -81,6 +83,23 @@ public class DepartmentController extends HttpServlet {
 					actionForward.setPath("/WEB-INF/views/departments/add.jsp");
 				}
 				
+				break;
+			case "update.do":
+				String m = request.getMethod();
+				if(m.toUpperCase().equals("POST")) {
+					departmentService.updateProcess(request, actionForward);
+					
+				} else {
+					
+					departmentService.update(request, actionForward);
+					
+				}				
+				
+				
+				break;
+				
+			case "delete.do":
+				departmentService.delete(request, actionForward);
 				break;
 			}
 		}catch (Exception e) {

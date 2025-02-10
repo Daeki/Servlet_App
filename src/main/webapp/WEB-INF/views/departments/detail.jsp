@@ -19,8 +19,8 @@
 		<h3><%= departmentDTO.getDepartment_name() %> </h3>
 		<h3><%= departmentDTO.getManager_id() %> </h3>
 		
-		<a href="./update.jsp?department_id=<%= departmentDTO.getDepartment_id() %>">부서 수정</a>
-		<a href="./deleteProcess.jsp?department_id=<%= departmentDTO.getDepartment_id() %>">부서삭제</a>
+		<a href="./update.do?department_id=<%= departmentDTO.getDepartment_id() %>">부서 수정</a>
+		<a href="./delete.do?department_id=<%= departmentDTO.getDepartment_id() %>">부서삭제</a>
 	
 	<%}else { %>
 		<h3>없는 부서</h3>

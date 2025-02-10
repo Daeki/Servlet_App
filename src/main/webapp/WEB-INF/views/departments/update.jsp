@@ -3,12 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String id = request.getParameter("department_id");
-	DepartmentDTO departmentDTO = new DepartmentDTO();
-	departmentDTO.setDepartment_id(Long.parseLong(id));
-	
-	DepartmentDAO departmentDAO = new DepartmentDAO();
-	departmentDTO = departmentDAO.getDetail(departmentDTO);
+
+	DepartmentDTO departmentDTO = (DepartmentDTO)request.getAttribute("dto");
 
 %>    
 <!DOCTYPE html>
@@ -20,7 +16,7 @@
 <body>
 	<h1>Update Form</h1>
 	
-	<form action="./updateProcess.jsp" method="post">
+	<form action="./update.do" method="post">
 		<input type="hidden" name="department_id" value="<%=departmentDTO.getDepartment_id() %>" >
 		<input type="text" name="department_name" value="<%= departmentDTO.getDepartment_name()%>">
 		<input type="text" name="manager_id" value="<%= departmentDTO.getManager_id()%>">
