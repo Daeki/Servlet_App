@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DepartmentController")
 public class DepartmentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DepartmentDAO departmentDAO;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -24,6 +27,7 @@ public class DepartmentController extends HttpServlet {
     public DepartmentController() {
         super();
         // TODO Auto-generated constructor stub
+        departmentDAO = new DepartmentDAO();
     }
 
 	/**
@@ -44,51 +48,54 @@ public class DepartmentController extends HttpServlet {
 	 *  	2) A 태그 사용         - GET
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		//StringBuffer url = request.getRequestURL();
+		String uri = request.getRequestURI();
+				
+		uri = uri.substring(uri.lastIndexOf("/")+1);
 		
-		
+		String path="";
 		
 		try {
-			// TODO Auto-generated method stub
-			String method = request.getMethod();
-			StringBuffer sb  = request.getRequestURL();
-			String uri = request.getRequestURI();
-			
-			//parameter
-			String department_id = request.getParameter("department_id");
-			
-	//		System.out.println(method);
-	//		System.out.println(sb.toString());
-	//		System.out.println(uri);
-			
-			uri = this.useSubString(uri);
-	//		this.useSplit(uri);
-	//		this.useToken(uri);
-			
-			DepartmentDAO departmentDAO = new DepartmentDAO();
-			
-			if(uri.equals("list.do")) {
-				List<DepartmentDTO> ar = departmentDAO.getList();
+			switch(uri) {
+			case "list.do":
+				path="/WEB-INF/views/departments/list.jsp";
 				
-				 PrintWriter p= response.getWriter();
-				 p.println("<h1>Department List</h1>");
-				 
-				 for(int i=0;i<ar.size();i++) {
-					 p.println("<h3>");
-					 p.println(ar.get(i).getDepartment_id());
-					 p.println("</h3>");
-					 p.println("<h3>"+ar.get(i).getDepartment_name()+"</h3>");
-				 }
-				 p.close();
-				
-			}else {
-				departmentDAO.getDetail();
+				List<DepartmentDTO> ar = departmentDAO.getList();		
+				//attribute : 속성 (키:String , 값:Object)
+				//          
+				request.setAttribute("list", ar);				
+				break;
+			case "detail.do":
+				path="/WEB-INF/views/departments/detail.jsp";
+				String id=request.getParameter("department_id");
+				DepartmentDTO departmentDTO = new DepartmentDTO();
+				departmentDTO.setDepartment_id(Long.parseLong(id));
+				departmentDTO = departmentDAO.getDetail(departmentDTO);
+				request.setAttribute("dto", departmentDTO);
+				break;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		RequestDispatcher view = request.getRequestDispatcher(path);
+		view.forward(request, response);		
 		
+		
+
+		
+//		try {
+//			DepartmentDAO departmentDAO = new DepartmentDAO();
+//			List<DepartmentDTO> ar = departmentDAO.getList();		
+//			//attribute : 속성 (키:String , 값:Object)
+//			//          
+//			request.setAttribute("list", ar);
+//			
+//			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/departments/list.jsp");
+//			view.forward(request, response);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
@@ -99,26 +106,6 @@ public class DepartmentController extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	
-	private String useSubString(String data) {
-		String result = data.substring(data.lastIndexOf("/")+1);
-		System.out.println(result);
-		return result;
-	}
-	
-	private void useSplit(String data) {
-		String [] datas = data.split("/");
-		System.out.println(datas[datas.length-1]);
-	}
-	
-	private void useToken(String data) {
-		StringTokenizer st = new StringTokenizer(data, "/");
-		String result="";
-		while(st.hasMoreTokens()) {
-			result=st.nextToken();
-		}
-		
-		System.out.println(result);
-	}
+
 
 }

@@ -9,5 +9,37 @@
   <filter-mapping>
   	<filter-name>encode</filter-name>
   	<url-pattern>/*</url-pattern>
-  </filter-mapping>	
+  </filter-mapping>
+  
+  <!-- 배포서술자 DD -->
+  
+  <!-- Servlet 객체 생성 : 클래스명 참조변수명 = new 생성자() FQDN -->
+  <servlet>
+  	<servlet-name>homeController</servlet-name>
+  	<servlet-class>com.winter.app.HomeController</servlet-class>
+  </servlet>
+  
+  <!-- 어떤 요청이 왔을 떄 누구를 실행 -->
+  <servlet-mapping>
+  	<servlet-name>homeController</servlet-name>
+  	<url-pattern>/index.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- departments -->
+  <servlet>
+  	<servlet-name>department</servlet-name>
+  	<servlet-class>com.winter.app.departments.DepartmentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>department</servlet-name>
+  	<url-pattern>/departments/*</url-pattern>
+  </servlet-mapping>
+  	
 </web-app>
+
+
+
+
+
+
+

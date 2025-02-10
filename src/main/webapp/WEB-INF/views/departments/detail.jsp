@@ -3,12 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	DepartmentDTO departmentDTO = new DepartmentDTO();
-	String department_id= request.getParameter("department_id");
-	departmentDTO.setDepartment_id(Long.parseLong(department_id));
-	
-	DepartmentDAO departmentDAO = new DepartmentDAO();
-	departmentDTO = departmentDAO.getDetail(departmentDTO);
+	DepartmentDTO departmentDTO = (DepartmentDTO)request.getAttribute("dto");
 %>    
 <!DOCTYPE html>
 <html>
