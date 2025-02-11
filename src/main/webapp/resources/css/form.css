@@ -1,0 +1,18 @@
+
+
+.form_control {
+	width: 50%;
+	margin: 30px auto;
+}
+
+.form_control fieldset {
+	
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.form_control input {
+	width: 250px;
+	height: 20px;
+	
+}
