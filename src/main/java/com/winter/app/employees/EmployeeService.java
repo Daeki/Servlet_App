@@ -12,6 +12,25 @@ public class EmployeeService {
 		employeeDAO = new EmployeeDAO();
 	}
 	
+	public void login(HttpServletRequest request, ActionForward actionForward)throws Exception{
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+		employeeDTO.setEmployee_id(Long.parseLong(request.getParameter("employee_id")));
+		employeeDTO.setPassword(request.getParameter("password"));
+		employeeDTO = employeeDAO.login(employeeDTO);
+		
+		if(employeeDTO != null) {
+			//index
+		}else {
+			//
+			request.setAttribute("result", "로그인 실패");
+			request.setAttribute("path", "./login.do");
+			actionForward.setFlag(true);
+			actionForward.setPath("/WEB-INF/views/commons/result.jsp");
+			
+		}
+		
+	}
+	
 	public void add(HttpServletRequest request, ActionForward actionForward)throws Exception{
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 //		employeeDTO.setFirst_name(request.getParameter("first_name"));

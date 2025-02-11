@@ -49,7 +49,7 @@ public class EmployeeController extends HttpServlet {
 				String method = request.getMethod();
 				
 				if(method.toUpperCase().equals("POST")) {
-					
+					employeeService.login(request, actionForward);
 				}else {
 					actionForward.setFlag(true);
 					actionForward.setPath("/WEB-INF/views/employees/login.jsp");

@@ -2,10 +2,37 @@ package com.winter.app.employees;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.winter.app.utils.DBConnection;
 
 public class EmployeeDAO {
+	
+	public EmployeeDTO login(EmployeeDTO employeeDTO)throws Exception{
+		Connection con = DBConnection.getConnection();
+		
+		String sql ="SELECT EMPLOYEE_ID, PASSWORD, FIRST_NAME FROM EMPLOYEES"
+				+ " WHERE EMPLOYEE_ID=? AND PASSWORD=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setLong(1, employeeDTO.getEmployee_id());
+		st.setString(2, employeeDTO.getPassword());
+		
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			employeeDTO.setFirst_name(rs.getString("FIRST_NAME"));
+		}else {
+			employeeDTO=null;
+		}
+		
+		DBConnection.disConnction(rs, st, con);
+		
+		return employeeDTO;
+		
+		
+	}
 	
 	public int add(EmployeeDTO employeeDTO)throws Exception{
 		Connection con = DBConnection.getConnection();
