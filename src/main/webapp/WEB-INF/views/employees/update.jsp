@@ -16,21 +16,19 @@
 			<div class="right contents_right">
 				<!-- contents 내용 기술 -->
 				<div class="form_control">
-					<form action="login.do" method="post">
-						<fieldset>
-							<legend>사원번호</legend>
-							<input type="text" name="employee_id">
-						</fieldset>
-						<fieldset>
-							<legend>Password</legend>
-							<input type="password" name="password">
-						</fieldset>
-
-							<label>ID기억하기</label>
-							<input type="checkbox" name="">
+					<form action="update.do" method="post">
 						
 						<fieldset>
-							<button type="submit">로그인</button>
+							<legend>First Name</legend>
+							<input type="text" name="first_name" value="${sessionScope.user.first_name}">
+						</fieldset>
+						<fieldset>
+							<legend>Last Name</legend>
+							<input type="text" name="last_name" value="${requestScope.user.last_name}">
+						</fieldset>	
+						
+						<fieldset>
+							<button type="submit">정보수정</button>
 						</fieldset>				
 				</form>
 				</div>

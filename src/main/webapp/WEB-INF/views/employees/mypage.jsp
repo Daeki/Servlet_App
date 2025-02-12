@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/common.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
 	<c:import url="/WEB-INF/views/template/header.jsp"></c:import>
@@ -15,25 +14,17 @@
 			<c:import url="/WEB-INF/views/template/nav.jsp"></c:import>
 			<div class="right contents_right">
 				<!-- contents 내용 기술 -->
-				<div class="form_control">
-					<form action="login.do" method="post">
-						<fieldset>
-							<legend>사원번호</legend>
-							<input type="text" name="employee_id">
-						</fieldset>
-						<fieldset>
-							<legend>Password</legend>
-							<input type="password" name="password">
-						</fieldset>
-
-							<label>ID기억하기</label>
-							<input type="checkbox" name="">
-						
-						<fieldset>
-							<button type="submit">로그인</button>
-						</fieldset>				
-				</form>
+				
+				<div>
+					<h3>ID : ${sessionScope.user.employee_id}</h3>
+					<h3>FirstName : ${sessionScope.user.first_name}</h3>
+					<h3>LastName  : ${user.last_name}</h3>
 				</div>
+				
+				<div>
+					<a href="./update.do">정보 수정</a>
+				</div>
+			
 			</div>
 	
 		</section>	
