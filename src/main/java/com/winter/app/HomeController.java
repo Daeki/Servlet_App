@@ -29,19 +29,7 @@ public class HomeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Home Controller");
 		
-		//Cookie 생성
-		Cookie cookie = new Cookie("my", "test");
-		cookie.setMaxAge(60);
-		
-		response.addCookie(cookie);
-		
-		//jsp 연결
-		//path : JSP의 경로, 절대경로 
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-		//jsp fowarding
-		view.forward(request, response);
 	}
 
 	/**
